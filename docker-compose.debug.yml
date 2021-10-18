@@ -1,0 +1,11 @@
+version: '3'
+services:
+  eimy_fbg_be-api:    
+    build:
+      dockerfile: ./Dockerfile.debug.eimy_fbg_be-api
+    image: eimy_fbg_be-api-livedebug
+    ports:
+    - "9228:9228"
+    volumes: 
+    - ./src:/app/src
+    - ./dist:/app/dist

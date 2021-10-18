@@ -1,0 +1,47 @@
+version: '3'
+services:
+  eimy_fbg_be-api-base:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile.all.eimy_fbg_be-api-base
+    image: eimy_fbg_be-api-base
+  eimy_fbg_be-api:    
+    build:
+      context: ./
+      dockerfile: ./Dockerfile.release.eimy_fbg_be-api
+    image: eimy_fbg_be-api
+    depends_on:
+      - eimy_fbg_be-api-base
+      - mongo
+    links:
+      - mongo:mongo
+    networks: 
+    - eimy_fbg_be-net
+    ports:    
+    - "5000:5000"
+    environment:
+      MONGO_URL: mongodb://app_mongo_user:b27d094395e34033b355c5af0c57ff1e@mongo:27017/eimyFBG?authSource=admin
+      PORT: 5000      
+  mongo:
+    image: mongo
+    volumes:
+    - db_data:/data/db
+    restart: always
+    command: --storageEngine wiredTiger
+    ports:
+    - "27017:27017"
+    depends_on:
+      - eimy_fbg_be-api-base    
+    networks:
+    - eimy_fbg_be-net
+    environment: 
+      MONGO_INITDB_ROOT_USERNAME: app_mongo_user
+      MONGO_INITDB_ROOT_PASSWORD: b27d094395e34033b355c5af0c57ff1e
+
+
+volumes:
+  db_data:
+
+networks: 
+  eimy_fbg_be-net: 
+    driver: bridge

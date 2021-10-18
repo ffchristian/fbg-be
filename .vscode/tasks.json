@@ -1,0 +1,61 @@
+{
+	// See https://go.microsoft.com/fwlink/?LinkId=733558
+	// for the documentation about the tasks.json format
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "[local] build",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"run",
+				"build"
+			],
+			"problemMatcher": [],
+			"group": {
+				"_id": "build",
+				"isDefault": false
+			}
+		},
+		{
+			"label": "[docker] build-and-start",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"run",
+				"docker-run"
+			],
+			"problemMatcher": []
+		},
+		{
+			"label": "[docker] build-and-watch",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"run",
+				"docker-watch"
+			],
+			"problemMatcher": []
+		},
+		{
+			"label": "[docker] stop-and-remove",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"run",
+				"docker-stop"
+			],
+			"problemMatcher": []
+		},
+		{
+			"label": "[docker] docker-cleanup",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"run",
+				"docker-cleanup"
+			],
+			"problemMatcher": []
+		}
+	]
+}

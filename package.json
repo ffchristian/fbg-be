@@ -1,0 +1,41 @@
+{
+  "name": "eimy_fbg_be",
+  "version": "0.0.0",
+  "description": "code challege be",
+  "main": "./",
+  "license": "ISC",
+  "author": {
+    "name": "your name",
+    "email": "your email address",
+    "url": "your website/blog"
+  },
+  "scripts": {
+    "restore-global": "npm install -g typescript tslint typings nodemon",
+    "restore-local": "npm install  && typings i",
+    "restore-all": "npm run restore-global && npm run restore-local",
+    "build": "npm run build-ts && npm run tslint && echo Build finished!",
+    "start": "npm run build && API_PORT=5000 nodemon dist/server.js",
+    "build-ts": "npx tsc",
+    "build-watch": "tsc -w",
+    "tslint": "npx tslint -c tslint.json -p tsconfig.json",
+    "docker-run": "npm run build && docker-compose -f docker-compose.yml -f docker-compose.debug.yml build && docker-compose -f docker-compose.yml -f docker-compose.debug.yml up -d --remove-orphans --build --force-recreate",
+    "docker-watch": "npm run docker-run && npm run build-watch",
+    "docker-stop": "docker-compose -f docker-compose.yml -f docker-compose.debug.yml down && echo Docker Compose Down finished!",
+    "docker-stop-cleanup": "docker-compose -f docker-compose.yml -f docker-compose.debug.yml down -v --remove-orphans",
+    "docker-cleanup": "npm run docker-stop-cleanup && docker rmi eimy_fbg_be-api eimy_fbg_be-api-livedebug eimy_fbg_be-api-base || echo Cleanup finished!"
+  },
+  "dependencies": {
+    "mongodb": "^4.1.3",
+    "mongoose": "^6.0.11",
+    "restify": "^8.6.0",
+    "restify-cors-middleware2": "^2.1.2"
+  },
+  "devDependencies": {
+    "@types/mongodb": "^3.6.20",
+    "@types/node": "^14.0.23",
+    "@types/restify": "^8.5.1",
+    "nodemon": "^2.0.9",
+    "tslint": "^6.1.3",
+    "typescript": "^4.3.5"
+  }
+}
