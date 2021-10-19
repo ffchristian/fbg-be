@@ -69,7 +69,7 @@ const getMaxHist = (C: number, row: any[]) => {
   }
   return {result: maxArea, left: maxLeft, right: maxRight};
 };
-export const fidBiggestRectangle = (R: number, C: number, matrixData: any[]) => {
+export const findBiggestRectangle = (R: number, C: number, matrixData: any[]) => {
   let top = 0;
   let bottom = 0;
   const matrix = JSON.parse(JSON.stringify(matrixData));

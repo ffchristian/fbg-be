@@ -1,5 +1,5 @@
 import { Document, Model, model, Types, Schema, Query } from "mongoose";
-import { fidBiggestRectangle, getBiggestRectanguleCoordinates } from "../../../utils";
+import { findBiggestRectangle, getBiggestRectanguleCoordinates } from "../../../utils";
 
 // Schema
 const boardSchema = new Schema<BoardBaseDocument, BoardModel>({
@@ -52,7 +52,7 @@ boardSchema.methods.drawBiggestRectangleFromCoordinates = function(this: BoardBa
 };
 
 boardSchema.methods.findBiggestRectangleCoordinates = function(this: BoardBaseDocument, boardSize: any): {x: number, y: number}[] {
-  const result = fidBiggestRectangle(boardSize.width, boardSize.height,  this.matrixData);
+  const result = findBiggestRectangle(boardSize.width, boardSize.height,  this.matrixData);
   this.lRectCoodinates = getBiggestRectanguleCoordinates(result.top, result.bottom, result.left, result.right, this.matrixData);
   return this.lRectCoodinates;
 };
